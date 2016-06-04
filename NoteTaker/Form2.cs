@@ -26,9 +26,14 @@ namespace NoteTaker
             }
             else
             {
+                var db = new SQLiteDatabase();
+                string noteContent = richTextBox1.Rtf;
                 string noteName = richTextBox2.Text;
-                string path = String.Format("C:\\Users\\Danny\\Notes\\{0}", noteName);
-                richTextBox1.SaveFile(path, RichTextBoxStreamType.RichText);
+                Dictionary<String, String> data = new Dictionary<String, String>();
+                data.Add("entry", "null");
+                data.Add("note", noteContent);
+                data.Add("title", noteName);
+                db.Insert("notes", data);
             }
         }
 
@@ -42,7 +47,8 @@ namespace NoteTaker
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+
+        private void button1_Click_1(object sender, EventArgs e)
         {
             saveFile();
         }
